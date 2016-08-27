@@ -1,0 +1,28 @@
+In Java NIO, channels are used for I/O transfers. Channel is a like a tube that transports data between a buffer and an entity at other end. A channel reads data from an entity and places it in buffer blocks for consumption. Similarly, we should write to buffer blocks and that data will be transported by the channel to the other end.
+
+Channels are the gateway provided by Java NIO to access the native I/O mechanism. We should use buffers to interact with the channels, so the channel is like a bridge between two entities to do the I/O. Buffers are the endpoints provided by channels to send and receive data.
+
+Java-NIO-Channel
+
+Channel Characteristics
+
+Unlike streams, channels are two-way. A channel can both read and write.
+Channel reads data into a buffer and writes data from a buffer.
+Channels can do asynchronous read and write operations.
+Channels can be on blocking or non-blocking modes.
+Non-blocking channel does not put the invoking thread in sleep mode.
+Stream-oriented channels like sockets only can be placed in non-blocking mode.
+Data can be transferred from Channel to Channel if any one of them is a FileChannel.
+Java NIO Channel Classes
+
+Following are the two major types of Channels classes provided as implementation in Java NIO package.
+
+FileChannel
+These are based File read/write channels that cannot be placed on nonblocking mode.
+SocketChannel
+There are three socket channel types namely, SocketChannel, ServerSocketChannel and DatagramChannel.
+These are selectable channels that can operate in nonblocking mode.
+
+Java NIO Channel Example
+
+Following example reads from a text file and prints the content to the console. We have used RandomAccessFile and FileChannel to read the file into a ByteBuffer. We read 512 bytes of data into buffer then invoke flip method to make it ready for the get operation. On get we print the content to console the clear the buffer to keep it ready for the next sequence of read. This keeps on continuing until the end of file.
