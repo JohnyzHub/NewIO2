@@ -56,5 +56,11 @@ public class PathInfo {
 		for (String fileName : fileNameList) {
 			System.out.println("File :" + fileName);
 		}
+
+		File tempFile = File.createTempFile("MyTemp", ".txt");
+		System.out.println("\nTemp File " + tempFile + " Created.");
+		tempFile.deleteOnExit();
+		System.out.println("Temp File deleted.");
+
 	}
 }
