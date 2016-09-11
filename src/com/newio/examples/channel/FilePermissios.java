@@ -31,7 +31,6 @@ public class FilePermissios {
 		try {
 			userPrincipal1 = attributeView.getOwner();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
