@@ -24,7 +24,7 @@ public class UDPClient {
 					break;
 				}
 				bytesSent = userMessage.getBytes();
-				packet = new DatagramPacket(bytesSent, bytesSent.length, address, 9003);
+				packet = new DatagramPacket(bytesSent, bytesSent.length, address, 9009);
 				client.send(packet);
 				bytesReceived = new byte[1024];
 				packet = new DatagramPacket(bytesReceived, bytesReceived.length);

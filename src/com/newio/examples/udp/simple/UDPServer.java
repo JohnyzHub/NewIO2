@@ -10,7 +10,7 @@ public class UDPServer {
 		System.out.println("Server Started");
 		byte[] bytesReceived = null;
 		DatagramPacket packet = null;
-		try (DatagramSocket serverSocket = new DatagramSocket(9003);) {
+		try (DatagramSocket serverSocket = new DatagramSocket(9009);) {
 			while (true) {
 				bytesReceived = new byte[1024];
 				packet = new DatagramPacket(bytesReceived, bytesReceived.length);

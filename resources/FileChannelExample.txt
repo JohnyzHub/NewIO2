@@ -26,3 +26,7 @@ These are selectable channels that can operate in nonblocking mode.
 Java NIO Channel Example
 
 Following example reads from a text file and prints the content to the console. We have used RandomAccessFile and FileChannel to read the file into a ByteBuffer. We read 512 bytes of data into buffer then invoke flip method to make it ready for the get operation. On get we print the content to console the clear the buffer to keep it ready for the next sequence of read. This keeps on continuing until the end of file.
+This is new text appended. 
+This is new text appended. 
+This is new text appended. 
+This is new text appended. 

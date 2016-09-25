@@ -20,8 +20,8 @@ public class FileChannelExample {
 	}
 
 	private static void fromFileToConsole() {
-		try (RandomAccessFile randomAccessFile = new RandomAccessFile("FileChannelExample.txt", "r");
-				FileOutputStream outStream = new FileOutputStream("FileChannelOut.txt");
+		try (RandomAccessFile randomAccessFile = new RandomAccessFile("resources\\FileChannelExample.txt", "rw");
+				FileOutputStream outStream = new FileOutputStream("resources\\FileChannelOut.txt");
 				FileChannel fileChannel1 = randomAccessFile.getChannel();
 				FileChannel fileChannel2 = outStream.getChannel()) {
 			ByteBuffer byteBuffer = ByteBuffer.allocate(512);
@@ -41,10 +41,11 @@ public class FileChannelExample {
 			System.out.println("Finished Reading from FileChannelExample.txt");
 			printFileContentIO();
 			printFileContentNIO();
+			appendDataToFile(randomAccessFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Path path = Paths.get("FileChannelOut.txt");
+		Path path = Paths.get("resources\\FileChannelOut.txt");
 		System.out.println("Deleted");
 		try {
 			Files.deleteIfExists(path);
@@ -56,7 +57,7 @@ public class FileChannelExample {
 
 	private static void printFileContentIO() throws IOException {
 		System.out.println("\n OLD WAY ::: Printing data from FileChannelOut.txt \n\n");
-		try (FileReader fileReader = new FileReader("FileChannelOut.txt");
+		try (FileReader fileReader = new FileReader("resources\\FileChannelOut.txt");
 				BufferedReader bufferReader = new BufferedReader(fileReader)) {
 			String textRead = bufferReader.readLine();
 			while (textRead != null) {
@@ -68,7 +69,7 @@ public class FileChannelExample {
 
 	private static void printFileContentNIO() throws IOException {
 		System.out.println("\n NEW WAY ::: Printing data from FileChannelOut.txt \n\n");
-		Path path = Paths.get("FileChannelOut.txt");
+		Path path = Paths.get("resources\\FileChannelOut.txt");
 		try (Stream<String> lines = Files.lines(path).onClose(() -> System.out.println("File Closed"))) {
 
 			Iterator<String> linesItr = lines.iterator();
@@ -77,4 +78,8 @@ public class FileChannelExample {
 		}
 	}
 
+	private static void appendDataToFile(RandomAccessFile randomAccessFile) throws IOException {
+		String msg = "\nThis is new text appended. ";
+		randomAccessFile.write(msg.getBytes());
+	}
 }

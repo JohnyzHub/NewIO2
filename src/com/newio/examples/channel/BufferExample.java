@@ -11,6 +11,8 @@ import java.nio.file.StandardOpenOption;
 
 public class BufferExample {
 
+	private static final String location = "resources\\ByteBufferExample.txt";
+
 	public static void main(String[] args) {
 		BufferExample bufferExample = new BufferExample();
 		try {
@@ -24,7 +26,7 @@ public class BufferExample {
 	}
 
 	private void write() throws IOException {
-		Path path = Paths.get("ByteBufferExample.txt");
+		Path path = Paths.get(location);
 		File file = path.toFile();
 		if (!file.canWrite()) {
 			System.out.println("File - " + file.getName() + " is READ-ONLY");
@@ -38,14 +40,14 @@ public class BufferExample {
 		try (FileChannel channel = FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE);) {
 			channel.write(byteBuffer);
 		}
+		System.out.println("Writing to File Finished");
 	}
 
 	private void read() throws IOException {
-		Path path = Paths.get("ByteBufferExample.txt");
+		Path path = Paths.get(location);
 		ByteBuffer byteBuffer = ByteBuffer.allocate(5);
 		try (FileChannel channel = FileChannel.open(path)) {
-			int bytesRead = channel.read(byteBuffer);
-			while (bytesRead > 0) {
+			while ((channel.read(byteBuffer)) > 0) {
 				// No need to flip buffer if reading all bytes at once as an
 				// array.
 				System.out.print(new String(byteBuffer.array()));
@@ -55,13 +57,13 @@ public class BufferExample {
 				// System.out.print((char) byteBuffer.get());
 				// }
 				byteBuffer.clear();
-				bytesRead = channel.read(byteBuffer);
 			}
+			System.out.println("\nWriting to Console Finished");
 		}
 	}
 
 	private void verifyPermissions() throws IOException {
-		Path path = Paths.get("ByteBufferExample.txt");
+		Path path = Paths.get(location);
 		File file = path.toFile();
 		boolean isWritable = Files.isWritable(path);
 		System.out.println("\nIs file - " + path.getFileName() + " ReadOnly - " + !file.canWrite());

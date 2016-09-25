@@ -24,7 +24,7 @@ public class FilePermissios {
 	public static void main(String[] args) {
 
 		Path newDir = Paths.get("TestDir");
-		Path existingFile = Paths.get("FileChannelExample.txt");
+		Path existingFile = Paths.get("resources\\FileChannelExample.txt");
 
 		FileOwnerAttributeView attributeView = Files.getFileAttributeView(existingFile, FileOwnerAttributeView.class);
 		UserPrincipal userPrincipal1 = null;
