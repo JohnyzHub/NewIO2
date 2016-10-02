@@ -7,13 +7,13 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 
 public class MappedByteBufferExample {
-
 	public static void main(String[] args) {
 		try (RandomAccessFile file = new RandomAccessFile("resources\\MappedByteBufferExample.txt", "rw");
 				FileChannel fileChannel = file.getChannel();) {
 			long size = fileChannel.size();
 			MappedByteBuffer mappedBuffer = fileChannel.map(MapMode.READ_WRITE, 0, size);
 
+			System.out.println("Text from File : -----");
 			while (mappedBuffer.hasRemaining()) {
 				System.out.print((char) mappedBuffer.get());
 			}
@@ -26,15 +26,13 @@ public class MappedByteBufferExample {
 				mappedBuffer.put(index, b2);
 				mappedBuffer.put(limit - index - 1, b1);
 			}
-			mappedBuffer.force();
-			mappedBuffer.clear();
+			mappedBuffer.flip();
+			System.out.println("Text Reversed : -----");
 			while (mappedBuffer.hasRemaining()) {
 				System.out.print((char) mappedBuffer.get());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
