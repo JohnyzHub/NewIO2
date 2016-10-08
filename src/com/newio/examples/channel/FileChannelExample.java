@@ -56,7 +56,7 @@ public class FileChannelExample {
 	}
 
 	private static void printFileContentIO() throws IOException {
-		System.out.println("\n OLD WAY ::: Printing data from FileChannelOut.txt \n\n");
+		System.out.println("\n IO ::: Printing data from FileChannelOut.txt \n\n");
 		try (FileReader fileReader = new FileReader("resources\\FileChannelOut.txt");
 				BufferedReader bufferReader = new BufferedReader(fileReader)) {
 			String textRead = bufferReader.readLine();
@@ -68,7 +68,7 @@ public class FileChannelExample {
 	}
 
 	private static void printFileContentNIO() throws IOException {
-		System.out.println("\n NEW WAY ::: Printing data from FileChannelOut.txt \n\n");
+		System.out.println("\n NEW IO ::: Printing data from FileChannelOut.txt \n\n");
 		Path path = Paths.get("resources\\FileChannelOut.txt");
 		try (Stream<String> lines = Files.lines(path).onClose(() -> System.out.println("File Closed"))) {
 
